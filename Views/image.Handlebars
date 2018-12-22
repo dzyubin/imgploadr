@@ -31,7 +31,7 @@
                 <strong class="panel-title">Comments</strong>
             </div>
             <div class="col-md-4 text-right">
-                <button class="btn btn-default btn-sm" id="btncomment"
+                <button class="btn btn-default btn-sm" id="btn-comment"
                         data-id="{{ image.uniqueId }}">
                     <i class="fa fa-comments-o"> Post
                         Comment...</i></button>
@@ -70,7 +70,8 @@
                             <button type="submit" id="comment-btn"
                                     class="btn btn-success" type="button">
                                 <i class="fa fa-comment"></i>
-                                Post</button>
+                                Post
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -86,7 +87,8 @@
                     <div class="media-body">
                         {{ comment }}
                         <br/>
-                        <strong class="media-heading">{{ name }}</strong> <small class="text-muted">{{ timeago timestamp }}</small>
+                        <strong class="media-heading">{{ name }}</strong>
+                        <small class="text-muted">{{ timeago timestamp }}</small>
                     </div>
                 </li>
             {{/each}}

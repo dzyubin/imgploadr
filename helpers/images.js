@@ -1,17 +1,15 @@
-const sidebar = require('../helpers/sidebar');
-
 module.exports = {
-  index: (req, res) => {
-    const ViewModel = {
-      images: [{
-        uniqueId: 1,
-        title: 'Sample Image 1',
-        description: '',
-        filename: 'sample1.jpg',
-        Views: 0,
-        likes: 0,
-        timestamp: Date.now()
-      }, {
+  popular() {
+    let images = [{
+      uniqueId: 1,
+      title: 'Sample Image 1',
+      description: '',
+      filename: 'sample1.jpg',
+      Views: 0,
+      likes: 0,
+      timestamp: Date.now()
+    },
+      {
         uniqueId: 2,
         title: 'Sample Image 2',
         description: '',
@@ -19,7 +17,8 @@ module.exports = {
         Views: 0,
         likes: 0,
         timestamp: Date.now()
-      }, {
+      },
+      {
         uniqueId: 3,
         title: 'Sample Image 3',
         description: '',
@@ -27,7 +26,8 @@ module.exports = {
         Views: 0,
         likes: 0,
         timestamp: Date.now()
-      }, {
+      },
+      {
         uniqueId: 4,
         title: 'Sample Image 4',
         description: '',
@@ -35,10 +35,8 @@ module.exports = {
         Views: 0,
         likes: 0,
         timestamp: Date.now()
-      }]
-    };
-    sidebar(ViewModel, (ViewModel) => {
-      res.render('index', ViewModel);
-    })
+      }
+    ];
+    return images;
   }
 };
