@@ -1,9 +1,48 @@
-module.exports = () => {
-  const stats = {
-    images: 0,
-    comments: 0,
-    Views: 0,
-    likes: 0
-  };
-  return stats;
+const models = require('../models'),
+  async = require('async');
+
+module.exports = (callback) => {
+  async.parallel([
+    (next) => {
+      models.Image.countDocuments({}, next);
+    },
+    (next) => {
+      models.Comment.countDocuments({}, next);
+    },
+    (next) => {
+      models.Image.aggregate([{
+        $group: {
+          _id: '1',
+          viewsTotal: { $sum: '$views' }
+        }
+      }], (err, result) => {
+        var viewsTotal = 0;
+        if (result.length > 0) {
+          viewsTotal += result[0].viewsTotal;
+        }
+        next(null, viewsTotal);
+      });
+    },
+    (next) => {
+      models.Image.aggregate([{
+        $group: {
+          _id: '1',
+          likesTotal: { $sum: '$likes' }
+        }
+      }], (err, result) => {
+        var likesTotal = 0;
+        if (result.length > 0) {
+          likesTotal += result[0].likesTotal;
+        }
+        next(null, likesTotal);
+      });
+    }
+  ], (err, results) => {
+    callback(null, {
+      images: results[0],
+      comments: results[1],
+      views: results[2],
+      likes: results[3]
+    });
+  });
 };
